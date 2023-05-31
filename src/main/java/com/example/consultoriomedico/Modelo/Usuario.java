@@ -14,8 +14,7 @@ public abstract class Usuario {
     public Usuario() {
     }
 
-    public Usuario(int codigo, String login, String senha, String nome, String cpf, boolean is_medico) {
-        this.codigo = codigo;
+    public Usuario(String login, String senha, String nome, String cpf, boolean is_medico) {
         this.login = login;
         this.senha = senha;
         this.nome = nome;
@@ -27,8 +26,8 @@ public abstract class Usuario {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setCodigo(int codigoMedico) {
+        this.codigo = codigoMedico;
     }
 
     public String getLogin() {

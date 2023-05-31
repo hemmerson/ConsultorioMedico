@@ -13,7 +13,7 @@ public class FabricaConexao {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             return DriverManager.getConnection
-                    ("jdbc:mysql://localhost:3306/ConsultorioMedico?useSSL=false","root","admin");
+                    ("jdbc:mysql://localhost:3306/ConsultorioMedico?allowMultiQueries=true&useSSL=false","root","admin");
         } catch (ClassNotFoundException | SQLException e) {
             throw new ErroDAO(e);
         }

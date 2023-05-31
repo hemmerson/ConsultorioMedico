@@ -1,5 +1,6 @@
-package com.example.consultoriomedico.DAO;
+package com.example.consultoriomedico.DAO.Interface;
 
+import com.example.consultoriomedico.DAO.ErroDAO;
 import com.example.consultoriomedico.Modelo.Paciente;
 
 import java.util.ArrayList;
@@ -10,8 +11,10 @@ import java.util.ArrayList;
  */
 public interface PacienteDaoInterface {
     public void inserir(Paciente p) throws ErroDAO;
-    public void deletar(Paciente p) throws ErroDAO;
-    public void deletar(int codigo) throws ErroDAO;
+
+//    public void deletar(Paciente p) throws ErroDAO;
+//    public void deletar(int codigo) throws ErroDAO;
+
     public void editar(Paciente p) throws ErroDAO;
     public Paciente buscar(int codigo) throws ErroDAO;
     public ArrayList<Paciente> buscar(Paciente p) throws ErroDAO;

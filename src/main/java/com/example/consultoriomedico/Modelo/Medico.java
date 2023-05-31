@@ -5,32 +5,30 @@ package com.example.consultoriomedico.Modelo;
  * on date 30/05/2023
  */
 public class Medico extends Usuario{
-    private int codigo;
+    private int codigoMedico;
     private String especializacao;
 
     public Medico() {
         super();
     }
 
-    public Medico(int codigo, String especializacao) {
-        this.codigo = codigo;
+    public Medico(int codigoMedico, String especializacao) {
+        this.codigoMedico = codigoMedico;
         this.especializacao = especializacao;
     }
 
-    public Medico(int codigoUsuario, String login, String senha, String nome, String cpf, boolean is_medico, int codigo, String especializacao) {
-        super(codigoUsuario, login, senha, nome, cpf, is_medico);
-        this.codigo = codigo;
+    public Medico(String login, String senha, String nome, String cpf, boolean is_medico, String especializacao) {
+        super(login, senha, nome, cpf, is_medico);
         this.especializacao = especializacao;
     }
 
-    @Override
-    public int getCodigo() {
-        return codigo;
+    public int getCodigoMedico() {
+        return codigoMedico;
     }
 
-    @Override
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+
+    public void setCodigoMedico(int codigoMedico) {
+        this.codigoMedico = codigoMedico;
     }
 
     public String getEspecializacao() {
@@ -45,7 +43,7 @@ public class Medico extends Usuario{
     public String toString() {
         return super.toString()+
                 "Medico{" +
-                "codigo=" + codigo +
+                "codigo=" + codigoMedico +
                 ", especializacao='" + especializacao + '\'' +
                 '}';
     }

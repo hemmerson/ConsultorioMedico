@@ -1,5 +1,6 @@
-package com.example.consultoriomedico.DAO;
+package com.example.consultoriomedico.DAO.Interface;
 
+import com.example.consultoriomedico.DAO.ErroDAO;
 import com.example.consultoriomedico.Modelo.Paciente;
 import com.example.consultoriomedico.Modelo.Prontuario;
 

@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  * on date 30/05/2023
  */
 public class Paciente extends Usuario{
-    private int codigo;
+    private int codigoPaciente;
     private String sexo, nomeMae, naturalidadeCidade, naturalidadeEstado, endereco;
     private LocalDateTime dataNascimento;
     private Prontuario prontuario;
@@ -16,8 +16,8 @@ public class Paciente extends Usuario{
         super();
     }
 
-    public Paciente(int codigo, String sexo, String nomeMae, String naturalidadeCidade, String naturalidadeEstado, String endereco, LocalDateTime dataNascimento) {
-        this.codigo = codigo;
+    public Paciente(int codigoPaciente, String sexo, String nomeMae, String naturalidadeCidade, String naturalidadeEstado, String endereco, LocalDateTime dataNascimento) {
+        this.codigoPaciente = codigoPaciente;
         this.sexo = sexo;
         this.nomeMae = nomeMae;
         this.naturalidadeCidade = naturalidadeCidade;
@@ -26,9 +26,8 @@ public class Paciente extends Usuario{
         this.dataNascimento = dataNascimento;
     }
 
-    public Paciente(int codigoUsuario, String login, String senha, String nome, String cpf, boolean is_medico, int codigo, String sexo, String nomeMae, String naturalidadeCidade, String naturalidadeEstado, String endereco, LocalDateTime dataNascimento) {
-        super(codigoUsuario, login, senha, nome, cpf, is_medico);
-        this.codigo = codigo;
+    public Paciente(String login, String senha, String nome, String cpf, boolean is_medico, String sexo, String nomeMae, String naturalidadeCidade, String naturalidadeEstado, String endereco, LocalDateTime dataNascimento) {
+        super(login, senha, nome, cpf, is_medico);
         this.sexo = sexo;
         this.nomeMae = nomeMae;
         this.naturalidadeCidade = naturalidadeCidade;
@@ -37,14 +36,12 @@ public class Paciente extends Usuario{
         this.dataNascimento = dataNascimento;
     }
 
-    @Override
-    public int getCodigo() {
-        return codigo;
+    public int getCodigoPaciente() {
+        return codigoPaciente;
     }
 
-    @Override
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setCodigoPaciente(int codigoPaciente) {
+        this.codigoPaciente = codigoPaciente;
     }
 
     public String getSexo() {
@@ -99,7 +96,7 @@ public class Paciente extends Usuario{
     public String toString() {
         return super.toString()+
                 "Paciente{" +
-                "codigo=" + codigo +
+                "codigo=" + codigoPaciente +
                 ", sexo='" + sexo + '\'' +
                 ", nomeMae='" + nomeMae + '\'' +
                 ", naturalidadeCidade='" + naturalidadeCidade + '\'' +
