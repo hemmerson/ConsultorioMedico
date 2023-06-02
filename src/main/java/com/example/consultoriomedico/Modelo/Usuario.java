@@ -14,6 +14,19 @@ public abstract class Usuario {
     public Usuario() {
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return codigo == usuario.codigo && Objects.equals(login, usuario.login) && Objects.equals(cpf, usuario.cpf);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigo, login, cpf);
+    }
+
     public Usuario(String login, String senha, String nome, String cpf, boolean is_medico) {
         this.login = login;
         this.senha = senha;
@@ -68,19 +81,6 @@ public abstract class Usuario {
 
     public void setIs_medico(boolean is_medico) {
         this.is_medico = is_medico;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Usuario usuario = (Usuario) o;
-        return codigo == usuario.codigo;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(codigo);
     }
 
     @Override
