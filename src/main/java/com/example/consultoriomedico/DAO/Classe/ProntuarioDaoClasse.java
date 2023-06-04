@@ -23,10 +23,10 @@ public class ProntuarioDaoClasse implements ProntuarioDaoInterface {
         con = FabricaConexao.pegaConexao();
     }
     @Override
-    public void inserir(Prontuario prontuario, Paciente paciente) throws ErroDAO {
-        String sql = "insert into prontuario (Paciente_idPaciente) values (?)";
+    public void inserir(Prontuario prontuario) throws ErroDAO {
+        String sql = "insert into Prontuario (Paciente_idPaciente) values (?)";
         try(PreparedStatement pstm = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)){
-            pstm.setInt(1, paciente.getCodigoPaciente());
+            pstm.setInt(1, prontuario.getPaciente().getCodigoPaciente());
             pstm.executeUpdate();
             ResultSet rs = pstm.getGeneratedKeys();
             if (rs.next()){
@@ -63,7 +63,39 @@ public class ProntuarioDaoClasse implements ProntuarioDaoInterface {
     }
 
     @Override
-    public ArrayList<Prontuario> buscar(Prontuario prontuario) throws ErroDAO {
+    public Prontuario buscar(int codigo) throws ErroDAO {
+        Prontuario p = null;
+        String sql = "select * from Prontuario where idProntuario = ?";
+        try(PreparedStatement pstm = con.prepareStatement(sql)){
+            pstm.setInt(1, codigo);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()){
+                p = new Prontuario();
+                p.setCodigo(rs.getInt(1));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new ErroDAO(e);
+        }
+        return p;
+    }
+
+    @Override
+    public ArrayList<Prontuario> buscar() throws ErroDAO {
         return null;
     }
+
+    public static void main(String[] args) {
+        try{
+            Paciente paciente = new Paciente();
+            paciente.setCodigoPaciente(1);
+            Prontuario p = new Prontuario();
+            p.setPaciente(paciente);
+            ProntuarioDaoClasse dao = new ProntuarioDaoClasse();
+            dao.inserir(p);
+        } catch (ErroDAO e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

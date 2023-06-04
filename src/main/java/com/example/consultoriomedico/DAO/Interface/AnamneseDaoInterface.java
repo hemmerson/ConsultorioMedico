@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public interface AnamneseDaoInterface {
     public void inserir(Anamnese a, Prontuario p, Medico m) throws ErroDAO;
     public Anamnese buscar(int codigo) throws ErroDAO;
-    public ArrayList<Anamnese> buscar(Anamnese a) throws ErroDAO;
+    public ArrayList<Anamnese> buscar() throws ErroDAO;
     public ArrayList<Anamnese> buscar(Prontuario p) throws ErroDAO;
     public ArrayList<Anamnese> buscar(Prontuario p, LocalDateTime dataInicio, LocalDateTime dataFinal) throws ErroDAO;
 }

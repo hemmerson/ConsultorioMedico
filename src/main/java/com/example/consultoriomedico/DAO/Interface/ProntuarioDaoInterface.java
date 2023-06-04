@@ -11,9 +11,10 @@ import java.util.ArrayList;
  * on date 30/05/2023
  */
 public interface ProntuarioDaoInterface {
-    public void inserir(Prontuario prontuario, Paciente paciente) throws ErroDAO;
+    public void inserir(Prontuario prontuario) throws ErroDAO;
 
     public void editar(Prontuario prontuario) throws ErroDAO;
+    public Prontuario buscar(int codigo) throws ErroDAO;
     public Prontuario buscar(Paciente paciente) throws ErroDAO;
-    public ArrayList<Prontuario> buscar(Prontuario prontuario) throws ErroDAO;
+    public ArrayList<Prontuario> buscar() throws ErroDAO;
 }
