@@ -3,7 +3,6 @@ package com.example.consultoriomedico.Controle;
 import com.example.consultoriomedico.DAO.Classe.PacienteDaoClasse;
 import com.example.consultoriomedico.DAO.ErroDAO;
 import com.example.consultoriomedico.DAO.Interface.PacienteDaoInterface;
-import com.example.consultoriomedico.Modelo.Medico;
 import com.example.consultoriomedico.Modelo.Paciente;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

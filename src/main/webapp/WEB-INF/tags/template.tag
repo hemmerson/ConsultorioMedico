@@ -51,7 +51,7 @@
 </head>
 <body>
 <c:if test="${empty sessionScope.usuario}">
-        <c:redirect url="login.jsp" />
+        <c:redirect url = 'login.jsp' />
 </c:if>
 <c:if test="${mensagem!=''}">
     <div id="mensagem">
@@ -143,7 +143,7 @@
                                     Médicos
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <li><a class="dropdown-item" href="formMedico.jsp">Cadastrar Médico</a></li>
+                                    <li><a class="dropdown-item" href="formMedico.jsp?acao=cadastrar">Cadastrar Médico</a></li>
                                     <li><a class="dropdown-item" href="#">Buscar Médico</a></li>
                                     <li><a class="dropdown-item" href="#">Listar Médicos</a></li>
                                 </ul>
@@ -165,7 +165,37 @@
                                     ${usuario} <i class="bi bi-person-circle"></i>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                                    <li><a class="dropdown-item" href="#">Editar Usuário</a></li>
+
+                                    <c:if test="${sessionScope.usuario.is_medico}">
+                                        <c:set var="editarUsuario" value="formMedico.jsp?acao=editar" />
+                                        <c:set var="idUsuario" value="${sessionScope.usuario.codigo}" />
+                                        <c:set var="codigoMedico" value="${sessionScope.usuario.codigoMedico}" />
+                                        <c:set var="login" value="${sessionScope.usuario.login}" />
+                                        <c:set var="senha" value="${sessionScope.usuario.senha}" />
+                                        <c:set var="nome" value="${sessionScope.usuario.nome}" />
+                                        <c:set var="cpf" value="${sessionScope.usuario.cpf}" />
+                                        <c:set var="especializacao" value="${sessionScope.usuario.especializacao}" />
+                                        <c:set var="link" value="${editarUsuario}&codigoMedico=${codigoMedico}&idUsuario=${idUsuario}&login=${login}&senha=${senha}&nome=${nome}&cpf=${cpf}&especializacao=${especializacao}" />
+                                    </c:if>
+
+                                    <c:if test="${!sessionScope.usuario.is_medico}">
+                                        <c:set var="editarUsuario" value="formPaciente.jsp?acao=editporpaciente" />
+                                        <c:set var="idUsuario" value="${sessionScope.usuario.codigo}" />
+                                        <c:set var="codigoPaciente" value="${sessionScope.usuario.codigoPaciente}" />
+                                        <c:set var="login" value="${sessionScope.usuario.login}" />
+                                        <c:set var="senha" value="${sessionScope.usuario.senha}" />
+                                        <c:set var="nome" value="${sessionScope.usuario.nome}" />
+                                        <c:set var="cpf" value="${sessionScope.usuario.cpf}" />
+                                        <c:set var="sexo" value="${sessionScope.usuario.sexo}" />
+                                        <c:set var="dataNascimento" value="${sessionScope.usuario.dataNascimento}" />
+                                        <c:set var="nomeMae" value="${sessionScope.usuario.nomeMae}" />
+                                        <c:set var="naturalCidade" value="${sessionScope.usuario.naturalidadeCidade}" />
+                                        <c:set var="naturalEstado" value="${sessionScope.usuario.naturalidadeEstado}" />
+                                        <c:set var="endereco" value="${sessionScope.usuario.endereco}" />
+                                        <c:set var="link" value="${editarUsuario}&codigoPaciente=${codigoPaciente}&idUsuario=${idUsuario}&login=${login}&senha=${senha}&nome=${nome}&cpf=${cpf}&sexo=${sexo}&nomeMae=${nomeMae}&dataNascimento=${dataNascimento}&naturalCidade=${naturalCidade}&naturalEstado=${naturalEstado}&endereco=${endereco}" />
+                                    </c:if>
+
+                                    <li><a class="dropdown-item" href="${link}">Editar Usuário</a></li>
                                     <li><a class="dropdown-item" href="sair">Sair</a></li>
                                 </ul>
                             </li>
