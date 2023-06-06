@@ -175,6 +175,15 @@ public class AnamneseDaoClasse implements AnamneseDaoInterface {
         return anamneses;
     }
 
+    @Override
+    public void sair() throws ErroDAO {
+        try{
+            con.close();
+        } catch (SQLException e) {
+            throw new ErroDAO(e);
+        }
+    }
+
     public static void main(String[] args) {
 
     }

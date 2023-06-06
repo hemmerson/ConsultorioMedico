@@ -141,7 +141,14 @@ public class MedicoDaoClasse implements MedicoDaoInterface {
         return medicos;
     }
 
-
+    @Override
+    public void sair() throws ErroDAO {
+        try{
+            con.close();
+        } catch (SQLException e) {
+            throw new ErroDAO(e);
+        }
+    }
     public static void main(String[] args){
 //        Medico m = new Medico("pauloh", "1234","Paulo Henrique", "333.222.222-21", true, "Pediatra");
 //        Medico m1 = new Medico("hemmerson", "1234","Hemmerson Luis Rosa", "022.222.222-21", true, "Cardiologista");

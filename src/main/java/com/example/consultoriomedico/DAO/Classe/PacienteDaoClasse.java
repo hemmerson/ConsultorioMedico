@@ -84,6 +84,23 @@ public class PacienteDaoClasse implements PacienteDaoInterface {
 
     }
 
+    public void editar(String senha, String endereco, int idUsuario) throws ErroDAO {
+        String sql = "start transaction;" +
+                "update Usuario set senha = ? where idUsuario = ?;" +
+                "UPDATE Paciente SET endereco = ?  WHERE Usuario_idUsuario = ?;" +
+                "commit;";
+        try(PreparedStatement pstm = con.prepareStatement(sql)){
+            pstm.setString(1, senha);
+            pstm.setInt(2, idUsuario);
+            pstm.setString(3, endereco);
+            pstm.setInt(4, idUsuario);
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            throw new ErroDAO(e);
+        }
+
+    }
+
     @Override
     public Paciente buscar(int codigo) throws ErroDAO {
         Paciente p = null;
@@ -145,6 +162,14 @@ public class PacienteDaoClasse implements PacienteDaoInterface {
         return p;
     }
 
+    @Override
+    public void sair() throws ErroDAO {
+        try{
+            con.close();
+        } catch (SQLException e) {
+            throw new ErroDAO(e);
+        }
+    }
     @Override
     public ArrayList<Paciente> buscar() throws ErroDAO {
         ArrayList<Paciente> pacientes = new ArrayList<>();

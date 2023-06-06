@@ -85,6 +85,15 @@ public class ProntuarioDaoClasse implements ProntuarioDaoInterface {
         return null;
     }
 
+    @Override
+    public void sair() throws ErroDAO {
+        try{
+            con.close();
+        } catch (SQLException e) {
+            throw new ErroDAO(e);
+        }
+    }
+
     public static void main(String[] args) {
         try{
             Paciente paciente = new Paciente();

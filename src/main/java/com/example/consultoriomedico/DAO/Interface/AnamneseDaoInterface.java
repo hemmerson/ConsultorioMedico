@@ -19,4 +19,5 @@ public interface AnamneseDaoInterface {
     public ArrayList<Anamnese> buscar() throws ErroDAO;
     public ArrayList<Anamnese> buscar(Prontuario p) throws ErroDAO;
     public ArrayList<Anamnese> buscar(Prontuario p, LocalDateTime dataInicio, LocalDateTime dataFinal) throws ErroDAO;
+    public void sair() throws ErroDAO;
 }

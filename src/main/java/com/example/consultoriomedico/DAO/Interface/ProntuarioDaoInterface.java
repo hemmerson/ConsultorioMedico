@@ -17,4 +17,5 @@ public interface ProntuarioDaoInterface {
     public Prontuario buscar(int codigo) throws ErroDAO;
     public Prontuario buscar(Paciente paciente) throws ErroDAO;
     public ArrayList<Prontuario> buscar() throws ErroDAO;
+    public void sair() throws ErroDAO;
 }

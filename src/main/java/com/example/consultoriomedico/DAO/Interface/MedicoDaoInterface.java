@@ -19,4 +19,5 @@ public interface MedicoDaoInterface {
     public Medico buscar(int codigo) throws ErroDAO;
     public Medico buscar(String login, String senha) throws ErroDAO;
     public ArrayList<Medico> buscar() throws ErroDAO;
+    public void sair() throws ErroDAO;
 }

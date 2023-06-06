@@ -17,7 +17,9 @@ public interface PacienteDaoInterface {
 //    public void deletar(int codigo) throws ErroDAO;
 
     public void editar(Paciente p) throws ErroDAO;
+    public void editar(String senha, String endereco, int idUsuario) throws ErroDAO;
     public Paciente buscar(int codigo) throws ErroDAO;
     public Paciente buscar(String login, String senha) throws ErroDAO;
     public ArrayList<Paciente> buscar() throws ErroDAO;
+    public void sair() throws ErroDAO;
 }
