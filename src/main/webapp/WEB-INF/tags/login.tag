@@ -42,7 +42,12 @@
 </head>
 <body>
 <div>
-    ${corpo}
+    <c:if test="${empty sessionScope.usuario}">
+        ${corpo}
+    </c:if>
+    <c:if test="${!empty sessionScope.usuario}">
+        <c:redirect url="index.jsp" />
+    </c:if>
 </div>
 
     <c:if test="${mensagem!=''}">

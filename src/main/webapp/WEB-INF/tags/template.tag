@@ -51,7 +51,7 @@
 </head>
 <body>
 <c:if test="${empty sessionScope.usuario}">
-        <c:redirect url = 'login.jsp' />
+        <c:redirect url = "login.jsp" />
 </c:if>
 <c:if test="${mensagem!=''}">
     <div id="mensagem">
@@ -117,7 +117,6 @@
     <c:set var="usuario" value= "${sessionScope.usuario.nome}" />
 </c:if>
 
-<c
 
 <header id="cabecalho">
     <div class="container">
