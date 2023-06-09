@@ -1,6 +1,7 @@
 package com.example.consultoriomedico.Modelo;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author "Hemmerson Luis Barros da Rosa"
@@ -10,6 +11,7 @@ public class Paciente extends Usuario{
     private int codigoPaciente;
     private String sexo, nomeMae, naturalidadeCidade, naturalidadeEstado, endereco;
     private LocalDateTime dataNascimento;
+    private List<Anamnese> anamneses;
 
     public Paciente() {
         super();
@@ -91,6 +93,14 @@ public class Paciente extends Usuario{
         this.dataNascimento = dataNascimento;
     }
 
+    public List<Anamnese> getAnamneses() {
+        return anamneses;
+    }
+
+    public void setAnamneses(List<Anamnese> anamneses) {
+        this.anamneses = anamneses;
+    }
+
     @Override
     public String toString() {
         return super.toString()+
@@ -104,4 +114,6 @@ public class Paciente extends Usuario{
                 ", dataNascimento=" + dataNascimento +
                 '}';
     }
+
+
 }

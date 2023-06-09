@@ -18,8 +18,7 @@ public class Anamnese {
     public Anamnese() {
     }
 
-    public Anamnese(int codigo, String exameFisico, String examesComplementares, String hipoteseDiagnostico, String diagnostico, String tratamento, LocalDateTime dataHora, Medico medico, Paciente paciente) {
-        this.codigo = codigo;
+    public Anamnese(String exameFisico, String examesComplementares, String hipoteseDiagnostico, String diagnostico, String tratamento, LocalDateTime dataHora, Medico medico, Paciente paciente) {
         this.exameFisico = exameFisico;
         this.examesComplementares = examesComplementares;
         this.hipoteseDiagnostico = hipoteseDiagnostico;

@@ -68,7 +68,7 @@ public class MedicoDaoClasse implements MedicoDaoInterface {
     @Override
     public Medico buscar(int codigo) throws ErroDAO {
         Medico m = null;
-        String sql = "select * from Usuario inner join Medico on idUsuario = Usuario_idUsuario where idUsuario = ?";
+        String sql = "select * from Usuario inner join Medico on idUsuario = Usuario_idUsuario where idMedico = ?";
         try(PreparedStatement pstm = con.prepareStatement(sql)){
             pstm.setInt(1,codigo);
             ResultSet rs = pstm.executeQuery();

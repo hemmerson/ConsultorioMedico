@@ -65,11 +65,11 @@
             Erro ao tentar mostra os dados.
         </c:if>
 
-        <c:if test="${mensagem=='sucessoaocadastrarpost'}">
-            Cadastrado com sucesso.
+        <c:if test="${mensagem=='sucessocadastraranamnese'}">
+            Anamnese Cadastrada com sucesso.
         </c:if>
-        <c:if test="${mensagem=='erroaocadastrarpost'}">
-            Erro ao tentar cadastrar.
+        <c:if test="${mensagem=='erroaotentarcadastraranamnese'}">
+            Erro ao tentar cadastrar anamnese.
         </c:if>
 
         <c:if test="${mensagem=='erroaotentarcadastrarmedico'}">

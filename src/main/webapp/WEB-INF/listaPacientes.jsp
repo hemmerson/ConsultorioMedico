@@ -22,7 +22,7 @@
             <th>LOGIN</th>
             <th>DATA DE NASCIMENTO</th>
             <th>EDITAR</th>
-            <th>NOVA</th>
+            <th>PRONTUÁRIO</th>
           </tr>
           <meu:pacientes pacientes="${requestScope.pacientes}" />
         </table>

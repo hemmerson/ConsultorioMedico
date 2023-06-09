@@ -32,5 +32,5 @@
     <td><fmt:parseDate value="${dataNascimento}" pattern="yyyy-MM-dd'T'HH:mm" type="both" var="dataehora"/>
         <fmt:formatDate value="${dataehora}" type="date" pattern="dd/MM/yyyy"/></td>
     <td style="text-align: center;"><a href="${link}" class="btn btn-outline-primary btn-sm"><i class="bi bi-pencil-square"></i></a></td>
-    <td style="text-align: center;"><a href="#" class="btn btn-outline-success btn-sm"><i class="bi bi-clipboard2-pulse-fill"></i></a></td>
+    <td style="text-align: center;"><a href="prontuario?codigoPaciente=${codigoPaciente}" class="btn btn-outline-success btn-sm"><i class="bi bi-clipboard2-pulse-fill"></i></a></td>
 </tr>

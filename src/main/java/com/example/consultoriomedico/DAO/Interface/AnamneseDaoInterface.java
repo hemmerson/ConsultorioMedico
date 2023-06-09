@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * on date 30/05/2023
  */
 public interface AnamneseDaoInterface {
-    public void inserir(Anamnese a, Paciente p, Medico m) throws ErroDAO;
+    public void inserir(Anamnese a) throws ErroDAO;
     public Anamnese buscar(int codigo) throws ErroDAO;
     public ArrayList<Anamnese> buscar() throws ErroDAO;
     public ArrayList<Anamnese> buscar(Paciente p) throws ErroDAO;

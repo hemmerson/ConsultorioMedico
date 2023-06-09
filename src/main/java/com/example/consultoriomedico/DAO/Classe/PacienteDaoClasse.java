@@ -103,7 +103,7 @@ public class PacienteDaoClasse implements PacienteDaoInterface {
     @Override
     public Paciente buscar(int codigo) throws ErroDAO {
         Paciente p = null;
-        String sql = "select * from Usuario inner join Paciente on idUsuario = Usuario_idUsuario where idUsuario = ?";
+        String sql = "select * from Usuario inner join Paciente on idUsuario = Usuario_idUsuario where idPaciente = ?";
         try(PreparedStatement pstm = con.prepareStatement(sql)){
             pstm.setInt(1,codigo);
             ResultSet rs = pstm.executeQuery();
