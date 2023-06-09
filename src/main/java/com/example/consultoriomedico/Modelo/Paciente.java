@@ -10,7 +10,6 @@ public class Paciente extends Usuario{
     private int codigoPaciente;
     private String sexo, nomeMae, naturalidadeCidade, naturalidadeEstado, endereco;
     private LocalDateTime dataNascimento;
-    private Prontuario prontuario;
 
     public Paciente() {
         super();

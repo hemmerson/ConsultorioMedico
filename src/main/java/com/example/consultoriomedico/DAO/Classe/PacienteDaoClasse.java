@@ -60,23 +60,22 @@ public class PacienteDaoClasse implements PacienteDaoInterface {
     @Override
     public void editar(Paciente p) throws ErroDAO {
         String sql = "start transaction;" +
-                        "update Usuario set login = ?, senha = ?, nome = ?, cpf = ? where idUsuario = ?;" +
+                        "update Usuario set senha = ?, nome = ?, cpf = ? where idUsuario = ?;" +
                         "UPDATE Paciente SET nomeMae = ?, dataNascimento = ?, sexo = ?, naturalidadeCidade = ?, naturalidadeEstado = ?," +
                         "endereco = ?  WHERE Usuario_idUsuario = ?;" +
                      "commit;";
         try(PreparedStatement pstm = con.prepareStatement(sql)){
-            pstm.setString(1, p.getLogin());
-            pstm.setString(2, p.getSenha());
-            pstm.setString(3, p.getNome());
-            pstm.setString(4, p.getCpf());
-            pstm.setInt(5, p.getCodigo());
-            pstm.setString(6, p.getNomeMae());
-            pstm.setString(7, p.getDataNascimento().toString());
-            pstm.setString(8, p.getSexo());
-            pstm.setString(9, p.getNaturalidadeCidade());
-            pstm.setString(10, p.getNaturalidadeEstado());
-            pstm.setString(11, p.getEndereco());
-            pstm.setInt(12, p.getCodigo());
+            pstm.setString(1, p.getSenha());
+            pstm.setString(2, p.getNome());
+            pstm.setString(3, p.getCpf());
+            pstm.setInt(4, p.getCodigo());
+            pstm.setString(5, p.getNomeMae());
+            pstm.setString(6, p.getDataNascimento().toString());
+            pstm.setString(7, p.getSexo());
+            pstm.setString(8, p.getNaturalidadeCidade());
+            pstm.setString(9, p.getNaturalidadeEstado());
+            pstm.setString(10, p.getEndereco());
+            pstm.setInt(11, p.getCodigo());
             pstm.executeUpdate();
         } catch (SQLException e) {
             throw new ErroDAO(e);

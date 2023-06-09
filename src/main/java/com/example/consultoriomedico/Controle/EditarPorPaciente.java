@@ -24,7 +24,7 @@ public class EditarPorPaciente extends HttpServlet {
         response.setContentType("text/html");
         String senha = request.getParameter("senha");
         String endereco = request.getParameter("endereco");
-        int idUsuario = Integer.parseInt(request.getParameter("codigoUsuario"));
+        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
 
         if (senha != null && endereco != null && endereco.length() > 0 && senha.length() > 0) {
             Paciente pacienteSessao = (Paciente) request.getSession().getAttribute("usuario");

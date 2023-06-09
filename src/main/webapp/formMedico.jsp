@@ -11,6 +11,7 @@
 <meu:template mensagem="${param.mensagem}" >
 
     <c:if test="${param.acao == 'cadastrar'}">
+        <c:set var="titulo" value="Cadastrar Médico" />
         <c:set var="acao" value="cadastrarMedico"/>
         <c:set var="codigoMedico" value=""/>
         <c:set var="idUsuario" value=""/>
@@ -22,6 +23,7 @@
         <c:set var="botao" value="Cadastrar"/>
     </c:if>
     <c:if test="${param.acao == 'editar'}">
+        <c:set var="titulo" value="Editar Médico" />
         <c:set var="acao" value="editarmedico"/>
         <c:set var="codigoMedico" value="${param.codigoMedico}"/>
         <c:set var="idUsuario" value="${param.idUsuario}"/>
@@ -36,7 +38,7 @@
 <div class="container">
     <div class="row justify-content-center mt-5">
         <div class="card-title text-center border-bottom">
-            <h2 class="p-3"><i class="bi bi-file-earmark-medical"></i>Cadastrar Medico</h2>
+            <h2 class="p-3"><i class="bi bi-file-earmark-medical"></i>${titulo}</h2>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-8">
             <form class="row g-3" method="post" action="${acao}">

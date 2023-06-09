@@ -19,6 +19,12 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <style>
+        .readonly{
+            background: #EEE;
+            pointer-events: none;
+            touch-action: none;
+        }
+
         #mensagem {
             position: absolute;
             text-align: center;
@@ -51,22 +57,14 @@
 </head>
 <body>
 <c:if test="${empty sessionScope.usuario}">
-        <c:redirect url = "login.jsp" />
+    <c:redirect url = "login.jsp" />
 </c:if>
 <c:if test="${mensagem!=''}">
     <div id="mensagem">
         <c:if test="${mensagem=='erroaomostrar'}">
             Erro ao tentar mostra os dados.
         </c:if>
-        <c:if test="${mensagem=='errologinesenha'}">
-            Informe o login e a senha.
-        </c:if>
-        <c:if test="${mensagem=='errousuarioesenhaincorreto'}">
-            Usuario ou senha incorretos.
-        </c:if>
-        <c:if test="${mensagem=='errobuscarloginesenha'}">
-            Erro no sistema ao tentar logar.
-        </c:if>
+
         <c:if test="${mensagem=='sucessoaocadastrarpost'}">
             Cadastrado com sucesso.
         </c:if>
@@ -100,9 +98,6 @@
             Paciente editado com sucesso.
         </c:if>
 
-        <c:if test="${mensagem=='errodadoslogininvalido'}">
-            Erro: dados incorretos.
-        </c:if>
 
         <c:if test="${mensagem=='sucessocadastrocomentario'}">
             Sucesso ao cadastrar o comentário.
@@ -131,7 +126,7 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
                             <li class="nav-item col-2">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
                             </li>
                             <li class="nav-item col-4">
                                 <a class="nav-link" href="#">Iniciar Consulta</a>
@@ -144,7 +139,7 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <li><a class="dropdown-item" href="formMedico.jsp?acao=cadastrar">Cadastrar Médico</a></li>
                                     <li><a class="dropdown-item" href="#">Buscar Médico</a></li>
-                                    <li><a class="dropdown-item" href="#">Listar Médicos</a></li>
+                                    <li><a class="dropdown-item" href="listarmedicos">Listar Médicos</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown col-5">
@@ -153,9 +148,9 @@
                                     Paciente
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-                                    <li><a class="dropdown-item" href="formPaciente.jsp">Cadastrar Paciente</a></li>
+                                    <li><a class="dropdown-item" href="formPaciente.jsp?acao=cadastrar">Cadastrar Paciente</a></li>
                                     <li><a class="dropdown-item" href="#">Buscar Paciente</a></li>
-                                    <li><a class="dropdown-item" href="#">Listar Pacientes</a></li>
+                                    <li><a class="dropdown-item" href="listarpacientes">Listar Pacientes</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown col-1">
@@ -178,7 +173,7 @@
                                     </c:if>
 
                                     <c:if test="${!sessionScope.usuario.is_medico}">
-                                        <c:set var="editarUsuario" value="formPaciente.jsp?acao=editporpaciente" />
+                                        <c:set var="editarUsuario" value="formPaciente.jsp?acao=editarporpaciente" />
                                         <c:set var="idUsuario" value="${sessionScope.usuario.codigo}" />
                                         <c:set var="codigoPaciente" value="${sessionScope.usuario.codigoPaciente}" />
                                         <c:set var="login" value="${sessionScope.usuario.login}" />

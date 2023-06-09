@@ -3,9 +3,10 @@ package com.example.consultoriomedico.DAO.Classe;
 import com.example.consultoriomedico.DAO.ErroDAO;
 import com.example.consultoriomedico.DAO.FabricaConexao;
 import com.example.consultoriomedico.DAO.Interface.AnamneseDaoInterface;
+import com.example.consultoriomedico.DAO.Interface.PacienteDaoInterface;
 import com.example.consultoriomedico.Modelo.Anamnese;
 import com.example.consultoriomedico.Modelo.Medico;
-import com.example.consultoriomedico.Modelo.Prontuario;
+import com.example.consultoriomedico.Modelo.Paciente;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,9 +27,9 @@ public class AnamneseDaoClasse implements AnamneseDaoInterface {
         con = FabricaConexao.pegaConexao();
     }
     @Override
-    public void inserir(Anamnese a, Prontuario p, Medico m) throws ErroDAO {
+    public void inserir(Anamnese a, Paciente p, Medico m) throws ErroDAO {
         String sql = "insert into Anamnese (exameFisico, examesComplementares, hipoteseDiagnostico, diagnostico, " +
-                "tratamento, dataHora, Medico_idMedico, Prontuario_idProntuario) values (?,?,?,?,?,?,?,?)";
+                "tratamento, dataHora, Medico_idMedico, Paciente_idPaciente) values (?,?,?,?,?,?,?,?)";
         try(PreparedStatement pstm = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)){
             pstm.setString(1, a.getExameFisico());
             pstm.setString(2, a.getExamesComplementares());
@@ -37,7 +38,7 @@ public class AnamneseDaoClasse implements AnamneseDaoInterface {
             pstm.setString(5, a.getTratamento());
             pstm.setString(6, a.getDataHora().toString());
             pstm.setInt(7, m.getCodigoMedico());
-            pstm.setInt(8, p.getCodigo());
+            pstm.setInt(8, p.getCodigoPaciente());
             pstm.executeUpdate();
             ResultSet rs = pstm.getGeneratedKeys();
             if (rs.next()){
@@ -53,7 +54,7 @@ public class AnamneseDaoClasse implements AnamneseDaoInterface {
     public Anamnese buscar(int codigo) throws ErroDAO {
         Anamnese a = null;
         Medico m = null;
-        Prontuario p = null;
+        Paciente p = null;
         String sql = "select * from Anamnese where idAnamnese = ?";
         try(PreparedStatement pstm = con.prepareStatement(sql)){
             pstm.setInt(1, codigo);
@@ -61,9 +62,9 @@ public class AnamneseDaoClasse implements AnamneseDaoInterface {
             if (rs.next()) {
                 a = new Anamnese();
                 m = new Medico();
-                p = new Prontuario();
+                p = new Paciente();
                 MedicoDaoClasse daoMedico = new MedicoDaoClasse();
-                ProntuarioDaoClasse daoProntuario = new ProntuarioDaoClasse();
+                PacienteDaoInterface daoPacinte = new PacienteDaoClasse();
                 a.setCodigo(rs.getInt(1));
                 a.setExameFisico(rs.getString(2));
                 a.setExamesComplementares(rs.getString(3));
@@ -72,9 +73,9 @@ public class AnamneseDaoClasse implements AnamneseDaoInterface {
                 a.setTratamento(rs.getString(6));
                 a.setDataHora(LocalDateTime.parse(rs.getString(7), DateTimeFormatter.ISO_DATE_TIME));
                 m = daoMedico.buscar(rs.getInt(8));
-                p = daoProntuario.buscar(rs.getInt(9));
+                p = daoPacinte.buscar(rs.getInt(9));
                 a.setMedico(m);
-                a.setProntuario(p);
+                a.setPaciente(p);
             }
             rs.close();
         } catch (SQLException e) {
@@ -92,9 +93,9 @@ public class AnamneseDaoClasse implements AnamneseDaoInterface {
             while (rs.next()){
                 Anamnese a = new Anamnese();
                 Medico m;
-                Prontuario p;
+                Paciente p;
                 MedicoDaoClasse daoMedico = new MedicoDaoClasse();
-                ProntuarioDaoClasse daoProntuario = new ProntuarioDaoClasse();
+                PacienteDaoInterface daoPaciente = new PacienteDaoClasse();
                 a.setCodigo(rs.getInt(1));
                 a.setExameFisico(rs.getString(2));
                 a.setExamesComplementares(rs.getString(3));
@@ -103,9 +104,9 @@ public class AnamneseDaoClasse implements AnamneseDaoInterface {
                 a.setTratamento(rs.getString(6));
                 a.setDataHora(LocalDateTime.parse(rs.getString(7), DateTimeFormatter.ISO_DATE_TIME));
                 m = daoMedico.buscar(rs.getInt(8));
-                p = daoProntuario.buscar(rs.getInt(9));
+                p = daoPaciente.buscar(rs.getInt(9));
                 a.setMedico(m);
-                a.setProntuario(p);
+                a.setPaciente(p);
                 anamneses.add(a);
             }
         } catch (SQLException e) {
@@ -115,11 +116,11 @@ public class AnamneseDaoClasse implements AnamneseDaoInterface {
     }
 
     @Override
-    public ArrayList<Anamnese> buscar(Prontuario p) throws ErroDAO {
+    public ArrayList<Anamnese> buscar(Paciente p) throws ErroDAO {
         ArrayList<Anamnese> anamneses = new ArrayList<>();
-        String sql = "select * from Anamnese where Prontuario_idProntuario = ?";
+        String sql = "select * from Anamnese where Paciente_idPaciente = ?";
         try(PreparedStatement pstm = con.prepareStatement(sql)){
-            pstm.setInt(1, p.getCodigo());
+            pstm.setInt(1, p.getCodigoPaciente());
             ResultSet rs = pstm.executeQuery();
             while (rs.next()){
                 Anamnese a = new Anamnese();
@@ -134,7 +135,7 @@ public class AnamneseDaoClasse implements AnamneseDaoInterface {
                 a.setDataHora(LocalDateTime.parse(rs.getString(7), DateTimeFormatter.ISO_DATE_TIME));
                 m = daoMedico.buscar(rs.getInt(8));
                 a.setMedico(m);
-                a.setProntuario(p);
+                a.setPaciente(p);
                 anamneses.add(a);
             }
         } catch (SQLException e) {
@@ -144,12 +145,12 @@ public class AnamneseDaoClasse implements AnamneseDaoInterface {
     }
 
     @Override
-    public ArrayList<Anamnese> buscar(Prontuario p, LocalDateTime dataInicio, LocalDateTime dataFinal) throws ErroDAO {
+    public ArrayList<Anamnese> buscar(Paciente p, LocalDateTime dataInicio, LocalDateTime dataFinal) throws ErroDAO {
         ArrayList<Anamnese> anamneses = new ArrayList<>();
-        String sql = "SELECT * FROM Anamnese WHERE Prontuario_idProntuario = ? and" +
+        String sql = "SELECT * FROM Anamnese WHERE Paciente_idPaciente = ? and" +
                 " dataNascimento BETWEEN ? and ?";
         try(PreparedStatement pstm = con.prepareStatement(sql)){
-            pstm.setInt(1, p.getCodigo());
+            pstm.setInt(1, p.getCodigoPaciente());
             pstm.setString(2, dataInicio.toString());
             pstm.setString(3, dataFinal.toString());
             ResultSet rs = pstm.executeQuery();
@@ -166,7 +167,7 @@ public class AnamneseDaoClasse implements AnamneseDaoInterface {
                 a.setDataHora(LocalDateTime.parse(rs.getString(7), DateTimeFormatter.ISO_DATE_TIME));
                 m = daoMedico.buscar(rs.getInt(8));
                 a.setMedico(m);
-                a.setProntuario(p);
+                a.setPaciente(p);
                 anamneses.add(a);
             }
         } catch (SQLException e) {

@@ -13,12 +13,12 @@ public class Anamnese {
     private String diagnostico, tratamento;
     private LocalDateTime dataHora;
     private Medico medico;
-    private Prontuario prontuario;
+    private Paciente paciente;
 
     public Anamnese() {
     }
 
-    public Anamnese(int codigo, String exameFisico, String examesComplementares, String hipoteseDiagnostico, String diagnostico, String tratamento, LocalDateTime dataHora, Medico medico, Prontuario prontuario) {
+    public Anamnese(int codigo, String exameFisico, String examesComplementares, String hipoteseDiagnostico, String diagnostico, String tratamento, LocalDateTime dataHora, Medico medico, Paciente paciente) {
         this.codigo = codigo;
         this.exameFisico = exameFisico;
         this.examesComplementares = examesComplementares;
@@ -27,7 +27,7 @@ public class Anamnese {
         this.tratamento = tratamento;
         this.dataHora = dataHora;
         this.medico = medico;
-        this.prontuario = prontuario;
+        this.paciente = paciente;
     }
 
     public int getCodigo() {
@@ -94,12 +94,12 @@ public class Anamnese {
         this.medico = medico;
     }
 
-    public Prontuario getProntuario() {
-        return prontuario;
+    public Paciente getPaciente() {
+        return paciente;
     }
 
-    public void setProntuario(Prontuario prontuario) {
-        this.prontuario = prontuario;
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
 
     @Override
@@ -126,7 +126,7 @@ public class Anamnese {
                 ", tratamento='" + tratamento + '\'' +
                 ", dataHora=" + dataHora +
                 ", medico=" + medico +
-                ", prontuario=" + prontuario +
+                ", paciente=" + paciente +
                 '}';
     }
 }
