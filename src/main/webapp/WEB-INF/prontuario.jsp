@@ -82,26 +82,12 @@
                             <tr>
                                 <th>PACIENTE</th>
                                 <th>MÉDICO</th>
+                                <th>DIAGNÓSTICO</th>
                                 <th>DATA DA CONSULTA</th>
                                 <th>HORÁRIO</th>
                                 <th>ABRIR</th>
                             </tr>
-                            <tr>
-                                <td>Hemmerson Luis Barros da Rosa</td>
-                                <td>Hemmerson Luis Barros da Rosa</td>
-                                <td>10/10/2000</td>
-                                <td>20:21</td>
-                                <td><a href="#" class="btn btn-outline-dark btn-sm"><i
-                                        class="bi bi-clipboard2-minus-fill"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>Hemmerson Luis Barros da Rosa</td>
-                                <td>Hemmerson Luis Barros da Rosa</td>
-                                <td>10/10/2000</td>
-                                <td>20:21</td>
-                                <td><a href="#" class="btn btn-outline-dark btn-sm"><i
-                                        class="bi bi-clipboard2-minus-fill"></i></a></td>
-                            </tr>
+                            <meu:anamneses anamneses="${requestScope.anamneses}" />
                         </table>
                     </div>
 

@@ -71,7 +71,7 @@ public class AnamneseDaoClasse implements AnamneseDaoInterface {
                 a.setHipoteseDiagnostico(rs.getString(4));
                 a.setDiagnostico(rs.getString(5));
                 a.setTratamento(rs.getString(6));
-                a.setDataHora(LocalDateTime.parse(rs.getString(7), DateTimeFormatter.ISO_DATE_TIME));
+                a.setDataHora(LocalDateTime.parse(rs.getString(7), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
                 m = daoMedico.buscar(rs.getInt(8));
                 p = daoPacinte.buscar(rs.getInt(9));
                 a.setMedico(m);
@@ -102,7 +102,7 @@ public class AnamneseDaoClasse implements AnamneseDaoInterface {
                 a.setHipoteseDiagnostico(rs.getString(4));
                 a.setDiagnostico(rs.getString(5));
                 a.setTratamento(rs.getString(6));
-                a.setDataHora(LocalDateTime.parse(rs.getString(7), DateTimeFormatter.ISO_DATE_TIME));
+                a.setDataHora(LocalDateTime.parse(rs.getString(7), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
                 m = daoMedico.buscar(rs.getInt(8));
                 p = daoPaciente.buscar(rs.getInt(9));
                 a.setMedico(m);
