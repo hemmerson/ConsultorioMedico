@@ -198,6 +198,36 @@ public class PacienteDaoClasse implements PacienteDaoInterface {
         }
         return pacientes;
     }
+    @Override
+    public ArrayList<Paciente> buscar(String cpf) throws ErroDAO {
+        ArrayList<Paciente> pacientes = new ArrayList<>();
+        String sql = "select * from Usuario inner join Paciente on idUsuario = Usuario_idUsuario where cpf like ? ";
+        try(PreparedStatement pstm = con.prepareStatement(sql)){
+            pstm.setString(1,'%'+cpf+'%');
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()){
+                Paciente paciente = new Paciente();
+                paciente.setCodigo(rs.getInt(1));
+                paciente.setLogin(rs.getString(2));
+                paciente.setSenha(rs.getString(3));
+                paciente.setIs_medico(rs.getBoolean(4));
+                paciente.setNome(rs.getString(5));
+                paciente.setCpf(rs.getString(6));
+                paciente.setCodigoPaciente(rs.getInt(7));
+                paciente.setSexo(rs.getString(8));
+                paciente.setDataNascimento(LocalDateTime.parse(rs.getString(9), DateTimeFormatter.ISO_DATE_TIME));
+                paciente.setNomeMae(rs.getString(10));
+                paciente.setNaturalidadeCidade(rs.getString(11));
+                paciente.setNaturalidadeEstado(rs.getString(12));
+                paciente.setEndereco(rs.getString(13));
+                pacientes.add(paciente);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new ErroDAO(e);
+        }
+        return pacientes;
+    }
 
     public static void main(String[] args){
 //        Paciente p = new Paciente("miguel","123","Miguel Barros Rosa", "888.222.111-33",false, "Masculino",
@@ -207,9 +237,10 @@ public class PacienteDaoClasse implements PacienteDaoInterface {
 //        p.setCodigoPaciente(1);
         try{
             PacienteDaoClasse dao = new PacienteDaoClasse();
-//            Paciente p = dao.buscar("miguel", "123");
+//            Paciente p = dao.buscar();
 //            System.out.println(p);
-            ArrayList<Paciente> pacientes = dao.buscar();
+//            System.out.println(p);
+            ArrayList<Paciente> pacientes = dao.buscar("1");
             for (Paciente p: pacientes) {
                 System.out.println(p);
             }

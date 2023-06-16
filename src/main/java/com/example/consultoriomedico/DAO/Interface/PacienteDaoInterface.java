@@ -21,5 +21,6 @@ public interface PacienteDaoInterface {
     public Paciente buscar(int codigo) throws ErroDAO;
     public Paciente buscar(String login, String senha) throws ErroDAO;
     public ArrayList<Paciente> buscar() throws ErroDAO;
+    public ArrayList<Paciente> buscar(String cpf) throws ErroDAO;
     public void sair() throws ErroDAO;
 }

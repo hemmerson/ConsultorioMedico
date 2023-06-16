@@ -15,6 +15,21 @@
         <h2 class="p-3"><i class="bi bi-file-earmark-medical"></i>Lista de Pacientes</h2>
       </div>
       <div class="col-lg-10 col-md-10 col-sm-10">
+
+        <div class="row">
+          <form class="row g-3" action="buscarpacientes" method="post">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+              <div class="input-group flex-nowrap">
+                <input type="text" class="form-control" placeholder="CPF" aria-label="CPF" id="cpf" name="cpf"
+                       aria-describedby="addon-wrapping">
+                <button type="submit" class="input-group-text" id="addon-wrapping" ><i class='bi bi-search'></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <hr />
+
         <table class="table table-striped table-hover">
           <tr>
             <th>NOME</th>
