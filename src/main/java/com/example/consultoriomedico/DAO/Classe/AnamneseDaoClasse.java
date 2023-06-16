@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author "Hemmerson Luis Barros da Rosa"
@@ -148,7 +149,7 @@ public class AnamneseDaoClasse implements AnamneseDaoInterface {
     public ArrayList<Anamnese> buscar(Paciente p, LocalDateTime dataInicio, LocalDateTime dataFinal) throws ErroDAO {
         ArrayList<Anamnese> anamneses = new ArrayList<>();
         String sql = "SELECT * FROM Anamnese WHERE Paciente_idPaciente = ? and" +
-                " dataNascimento BETWEEN ? and ?";
+                " dataHora BETWEEN ? and ?";
         try(PreparedStatement pstm = con.prepareStatement(sql)){
             pstm.setInt(1, p.getCodigoPaciente());
             pstm.setString(2, dataInicio.toString());
@@ -164,7 +165,7 @@ public class AnamneseDaoClasse implements AnamneseDaoInterface {
                 a.setHipoteseDiagnostico(rs.getString(4));
                 a.setDiagnostico(rs.getString(5));
                 a.setTratamento(rs.getString(6));
-                a.setDataHora(LocalDateTime.parse(rs.getString(7), DateTimeFormatter.ISO_DATE_TIME));
+                a.setDataHora(LocalDateTime.parse(rs.getString(7), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
                 m = daoMedico.buscar(rs.getInt(8));
                 a.setMedico(m);
                 a.setPaciente(p);
@@ -186,19 +187,25 @@ public class AnamneseDaoClasse implements AnamneseDaoInterface {
     }
 
     public static void main(String[] args) {
-        String exameFisico = "Ausculta pulmonar com estertores crepitantes, febre, tosse produtiva";
-        String hipoteseDiagnostico = "Pneumonia";
-        String examesComplementares = "Raio-X do tórax, hemograma completo, cultura de escarro";
-        String diagnostico = "Pneumonia bacteriana";
-        String tratamento = "Antibióticos (Amoxicilina) por 7 dias, repouso, hidratação adequada";
-        Paciente p = new Paciente();
-        Medico m = new Medico();
-        p.setCodigoPaciente(1);
-        m.setCodigoMedico(1);
-        Anamnese a = new Anamnese(exameFisico,examesComplementares,hipoteseDiagnostico,diagnostico,tratamento,LocalDateTime.now(),m,p);
+//        String exameFisico = "Ausculta pulmonar com estertores crepitantes, febre, tosse produtiva";
+//        String hipoteseDiagnostico = "Pneumonia";
+//        String examesComplementares = "Raio-X do tórax, hemograma completo, cultura de escarro";
+//        String diagnostico = "Pneumonia bacteriana";
+//        String tratamento = "Antibióticos (Amoxicilina) por 7 dias, repouso, hidratação adequada";
+//        Paciente p = new Paciente();
+//        Medico m = new Medico();
+//        p.setCodigoPaciente(1);
+//        m.setCodigoMedico(1);
+//        Anamnese a = new Anamnese(exameFisico,examesComplementares,hipoteseDiagnostico,diagnostico,tratamento,LocalDateTime.now(),m,p);
         try {
+            LocalDateTime dataInicio = LocalDateTime.parse("2023-06-10T00:00:00", DateTimeFormatter.ISO_DATE_TIME);
+            LocalDateTime dataFinal = LocalDateTime.parse("2023-06-17T00:00:00");
+            List<Anamnese> anamneses;
             AnamneseDaoInterface dao = new AnamneseDaoClasse();
-            dao.inserir(a);
+            PacienteDaoInterface daop = new PacienteDaoClasse();
+            Paciente p = daop.buscar(1);
+            anamneses = dao.buscar(p,dataInicio,dataFinal);
+            System.out.println(anamneses);
         } catch (ErroDAO e) {
             throw new RuntimeException(e);
         }

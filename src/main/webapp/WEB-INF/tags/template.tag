@@ -125,11 +125,9 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
+                            <li class="nav-item col-8"></li>
                             <li class="nav-item col-2">
                                 <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
-                            </li>
-                            <li class="nav-item col-4">
-                                <a class="nav-link" href="#">Iniciar Consulta</a>
                             </li>
                             <li class="nav-item dropdown col-3">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -138,7 +136,6 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <li><a class="dropdown-item" href="formMedico.jsp?acao=cadastrar">Cadastrar Médico</a></li>
-                                    <li><a class="dropdown-item" href="#">Buscar Médico</a></li>
                                     <li><a class="dropdown-item" href="listarmedicos">Listar Médicos</a></li>
                                 </ul>
                             </li>
@@ -149,7 +146,6 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
                                     <li><a class="dropdown-item" href="formPaciente.jsp?acao=cadastrar">Cadastrar Paciente</a></li>
-                                    <li><a class="dropdown-item" href="#">Buscar Paciente</a></li>
                                     <li><a class="dropdown-item" href="listarpacientes">Listar Pacientes</a></li>
                                 </ul>
                             </li>

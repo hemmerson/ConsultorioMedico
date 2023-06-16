@@ -26,6 +26,7 @@
         <c:set var="naturalEstado" value=""/>
         <c:set var="endereco" value=""/>
         <c:set var="botao" value="Cadastrar"/>
+        <c:set var="readonlyClass" value="" />
     </c:if>
 
     <c:if test="${param.acao == 'editarporpaciente' || param.acao == 'editarpaciente'}">
@@ -43,6 +44,8 @@
         <c:set var="naturalEstado" value="${param.naturalEstado}"/>
         <c:set var="endereco" value="${param.endereco}"/>
         <c:set var="botao" value="Editar"/>
+        <c:set var="readonly" value="readonly"/>
+
     </c:if>
 
     <c:if test="${param.acao == 'editarporpaciente'}" >
@@ -50,10 +53,11 @@
         <c:set var="disabled" value="readonly='readonly'" />
         <c:set var="classe" value="readonly" />
         <c:set var="desabilita" value="aria-disabled='true' tabindex='-1'" />
-        <c:set var="readonly" value="readonly" />
+        <c:set var="readonlyClass" value="readonly" />
     </c:if>
     <c:if test="${param.acao == 'editarpaciente'}" >
         <c:set var="acao" value="editarpaciente"/>
+        <c:set var="readonlyClass" value="" />
 
     </c:if>
     <c:if test="${param.acao == 'cadastrar'}" >
@@ -90,7 +94,7 @@
                     <hr>
                     <div class="col-md-6">
                         <label for="sexo" class="form-label">Sexo</label>
-                        <select name="sexo" id="sexo" class="form-control" ${disabled}>
+                        <select name="sexo" id="sexo" class="form-select ${readonlyClass}" ${desabilita}>
                             <option>Selecione</option>
                             <option value="masculino" <c:if test="${sexo == 'masculino'}">selected</c:if> >Masculino</option>
                             <option value="feminino" <c:if test="${sexo == 'feminino'}">selected</c:if> >Feminino</option>
@@ -113,7 +117,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="naturalEstado" class="form-label">Estado de Nascimento</label>
-                        <select id="naturalEstado" name="naturalEstado" class="form-select ${readonly}" ${desabilita} >
+                        <select id="naturalEstado" name="naturalEstado" class="form-select ${readonlyClass}" ${desabilita} >
                             <option>Selecione</option>
                             <option value="AC" <c:if test="${naturalEstado == 'AC'}">selected</c:if>>Acre</option>
                             <option value="AL" <c:if test="${naturalEstado == 'AL'}">selected</c:if>>Alagoas</option>
@@ -148,7 +152,7 @@
                     <div class="col-12">
                         <label for="endereco" class="form-label">Endereço Completo</label>
                         <input type="text" class="form-control" id="endereco" name="endereco"
-                               placeholder="Q. 310 Sul, Plano Diretor Sul, Palmas - TO" value="${endereco}">
+                               placeholder="EX: Q. 310 Sul, Plano Diretor Sul, Palmas - TO" value="${endereco}">
                     </div>
 
                     <div class="col-12">

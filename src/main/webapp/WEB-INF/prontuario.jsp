@@ -22,7 +22,7 @@
                 <h2 class="p-3"><i class="bi bi-file-earmark-medical"></i>Prontuário</h2>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12">
-                <form class="row g-3">
+                <div class="row g-3">
                     <div class="col-md-3">
                         <label for="login" class="form-label">Login: </label>
                         <input type="text" class="form-control-plaintext form-control-sm bg-light" id="login"
@@ -78,6 +78,23 @@
                         <a href="abrirAnamneseCadastrar?codigoPaciente=${requestScope.paciente.codigoPaciente}" class="btn btn-outline-success btn-lg float-end">Nova Consulta</a>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="row">
+                            <form class="row g-3" action="buscaranamnese" method="get">
+                                <input type="hidden" name="codigoPaciente" value="${requestScope.paciente.codigoPaciente}">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Buscar entre as datas: </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group mb-3">
+                                        <input type="date" class="form-control" aria-label="Data Inicio" id="dataInicio" name="dataInicio">
+                                        <input type="date" class="form-control" aria-label="Data Final" id="dataFinal" name="dataFinal">
+                                        <button type="submit" class="input-group-text" id="addon-wrapping" ><i class='bi bi-search'></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <hr />
                         <table class="table table-striped table-hover table-sm">
                             <tr>
                                 <th>PACIENTE</th>
@@ -90,15 +107,8 @@
                             <meu:anamneses anamneses="${requestScope.anamneses}" />
                         </table>
                     </div>
-
-
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary col-12"><i class="bi bi-save"></i>
-                            Cadastrar
-                        </button>
-                    </div>
                     <hr>
-                </form>
+                </div>
             </div>
         </div>
     </div>
