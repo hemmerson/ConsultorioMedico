@@ -53,18 +53,18 @@
                         <label for="dataNascimento" class="form-label">Data de Nascimento: </label>
                         <input type="text" id="dataNascimento" name="dataNascimento"
                                class="form-control-plaintext form-control-sm bg-light" disabled
-                        value="${dataFormatada}">
+                               value="${dataFormatada}">
                     </div>
 
                     <div class="col-md-3">
                         <label for="naturalCidade" class="form-label">Cidade de Nascimento: </label>
                         <input type="text" class="form-control-plaintext form-control-sm bg-light" id="naturalCidade"
-                               name="naturalCidade" disabled  value="${requestScope.paciente.naturalidadeCidade}">
+                               name="naturalCidade" disabled value="${requestScope.paciente.naturalidadeCidade}">
                     </div>
                     <div class="col-md-3">
                         <label for="naturalEstado" class="form-label">Estado de Nascimento: </label>
                         <input type="text" class="form-control-plaintext form-control-sm bg-light" id="naturalEstado"
-                               name="naturalEstado" disabled  value="${requestScope.paciente.naturalidadeEstado}">
+                               name="naturalEstado" disabled value="${requestScope.paciente.naturalidadeEstado}">
                     </div>
                     <div class="col-12">
                         <label for="endereco" class="form-label">Endereço Completo: </label>
@@ -75,26 +75,33 @@
 
                     <div class="card-title text-center border-bottom">
                         <h5 class="p-3"><i class="bi bi-file-earmark-medical"></i>Consultas</h5>
-                        <a href="abrirAnamneseCadastrar?codigoPaciente=${requestScope.paciente.codigoPaciente}" class="btn btn-outline-success btn-lg float-end">Nova Consulta</a>
+                        <c:if test="${sessionScope.usuario.is_medico}">
+                            <a href="abrirAnamneseCadastrar?codigoPaciente=${requestScope.paciente.codigoPaciente}"
+                               class="btn btn-outline-success btn-lg float-end">Nova Consulta</a>
+                        </c:if>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="row">
                             <form class="row g-3" action="buscaranamnese" method="get">
-                                <input type="hidden" name="codigoPaciente" value="${requestScope.paciente.codigoPaciente}">
+                                <input type="hidden" name="codigoPaciente"
+                                       value="${requestScope.paciente.codigoPaciente}">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-2">
                                     <label class="form-label">Buscar entre as datas: </label>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-group mb-3">
-                                        <input type="date" class="form-control" aria-label="Data Inicio" id="dataInicio" name="dataInicio">
-                                        <input type="date" class="form-control" aria-label="Data Final" id="dataFinal" name="dataFinal">
-                                        <button type="submit" class="input-group-text" id="addon-wrapping" ><i class='bi bi-search'></i></button>
+                                        <input type="date" class="form-control" aria-label="Data Inicio" id="dataInicio"
+                                               name="dataInicio">
+                                        <input type="date" class="form-control" aria-label="Data Final" id="dataFinal"
+                                               name="dataFinal">
+                                        <button type="submit" class="input-group-text" id="addon-wrapping"><i
+                                                class='bi bi-search'></i></button>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        <hr />
+                        <hr/>
                         <table class="table table-striped table-hover table-sm">
                             <tr>
                                 <th>PACIENTE</th>
@@ -104,7 +111,7 @@
                                 <th>HORÁRIO</th>
                                 <th>ABRIR</th>
                             </tr>
-                            <meu:anamneses anamneses="${requestScope.anamneses}" />
+                            <meu:anamneses anamneses="${requestScope.anamneses}"/>
                         </table>
                     </div>
                     <hr>

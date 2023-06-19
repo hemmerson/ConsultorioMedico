@@ -3,6 +3,7 @@ package com.example.consultoriomedico.Controle;
 import com.example.consultoriomedico.DAO.Classe.PacienteDaoClasse;
 import com.example.consultoriomedico.DAO.ErroDAO;
 import com.example.consultoriomedico.DAO.Interface.PacienteDaoInterface;
+import com.example.consultoriomedico.Modelo.Medico;
 import com.example.consultoriomedico.Modelo.Paciente;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,14 +25,19 @@ public class BuscarPaciente extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
         String cpf = request.getParameter("cpf");
-        try{
-            PacienteDaoInterface dao = new PacienteDaoClasse();
-            List<Paciente> pacientes = dao.buscar(cpf);
-            request.setAttribute("pacientes", pacientes);
-            dao.sair();
-            request.getRequestDispatcher("WEB-INF/listaPacientes.jsp").forward(request, response);
-        } catch (ErroDAO e) {
-            request.getRequestDispatcher("WEB-INF/listaPacientes.jsp?mensagem=erroaomostrar").forward(request, response);
+        Medico medicoSessao = (Medico) request.getSession().getAttribute("usuario");
+        if (medicoSessao != null && medicoSessao.isIs_medico()) {
+            try {
+                PacienteDaoInterface dao = new PacienteDaoClasse();
+                List<Paciente> pacientes = dao.buscar(cpf);
+                request.setAttribute("pacientes", pacientes);
+                dao.sair();
+                request.getRequestDispatcher("WEB-INF/listaPacientes.jsp").forward(request, response);
+            } catch (ErroDAO e) {
+                request.getRequestDispatcher("WEB-INF/listaPacientes.jsp?mensagem=erroaomostrar").forward(request, response);
+            }
+        }else{
+            response.sendRedirect("index.jsp?mensagem=acessonegado");
         }
     }
 }

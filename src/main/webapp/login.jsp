@@ -10,6 +10,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <meu:login mensagem="${param.mensagem}" >
 
+    <c:if test="${!empty sessionScope.usuario}" >
+        <c:redirect url="index.jsp" />
+    </c:if>
 
 <div class="container">
     <div class="row justify-content-center mt-5">

@@ -10,6 +10,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <meu:template mensagem="${param.mensagem}" >
 
+    <c:if test="${!sessionScope.usuario.is_medico}" >
+        <c:redirect url="index.jsp" />
+    </c:if>
+
     <c:if test="${param.acao == 'cadastrar'}">
         <c:set var="titulo" value="Cadastrar Médico" />
         <c:set var="acao" value="cadastrarMedico"/>

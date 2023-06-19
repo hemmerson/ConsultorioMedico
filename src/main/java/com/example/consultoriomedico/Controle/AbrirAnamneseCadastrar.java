@@ -41,7 +41,7 @@ public class AbrirAnamneseCadastrar extends HttpServlet {
                 request.getRequestDispatcher("WEB-INF/anamnese.jsp?mensagem=erroaoabriranamnese").forward(request, response);
             }
         } else {
-            response.sendRedirect("prontuario.jsp?mensagem=erroaotentarcadastrarpaciente");
+            response.sendRedirect("prontuario.jsp?mensagem=acessonegado");
         }
 
     }

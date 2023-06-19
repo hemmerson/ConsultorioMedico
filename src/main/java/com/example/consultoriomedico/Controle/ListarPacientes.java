@@ -3,6 +3,7 @@ package com.example.consultoriomedico.Controle;
 import com.example.consultoriomedico.DAO.Classe.PacienteDaoClasse;
 import com.example.consultoriomedico.DAO.ErroDAO;
 import com.example.consultoriomedico.DAO.Interface.PacienteDaoInterface;
+import com.example.consultoriomedico.Modelo.Medico;
 import com.example.consultoriomedico.Modelo.Paciente;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,14 +24,20 @@ public class ListarPacientes extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
-        try{
-            PacienteDaoInterface dao = new PacienteDaoClasse();
-            List<Paciente> pacientes = dao.buscar();
-            request.setAttribute("pacientes", pacientes);
-            dao.sair();
-            request.getRequestDispatcher("WEB-INF/listaPacientes.jsp").forward(request, response);
-        } catch (ErroDAO e) {
-            request.getRequestDispatcher("WEB-INF/listaPacientes.jsp?mensagem=erroaomostrar").forward(request, response);
-        }
+            try {
+                Medico medicoSessao = (Medico) request.getSession().getAttribute("usuario");
+                if (medicoSessao != null && medicoSessao.isIs_medico()) {
+                    PacienteDaoInterface dao = new PacienteDaoClasse();
+                    List<Paciente> pacientes = dao.buscar();
+                    request.setAttribute("pacientes", pacientes);
+                    dao.sair();
+                    request.getRequestDispatcher("WEB-INF/listaPacientes.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("index.jsp?mensagem=acessonegado");
+                }
+            } catch (ErroDAO e) {
+                request.getRequestDispatcher("WEB-INF/listaPacientes.jsp?mensagem=erroaomostrar").forward(request, response);
+            }
+
     }
 }
