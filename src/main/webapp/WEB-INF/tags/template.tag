@@ -98,13 +98,10 @@
             Paciente editado com sucesso.
         </c:if>
 
-
         <c:if test="${mensagem=='acessonegado'}">
             Acesso negado! Você não tem permissão para essa ação!
         </c:if>
-        <c:if test="${mensagem=='errocadastrocomentario'}">
-            Erro ao cadastrar o comentário.
-        </c:if>
+
     </div>
 </c:if>
 

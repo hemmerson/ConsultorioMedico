@@ -51,7 +51,13 @@ public class CadastrarPaciente extends HttpServlet {
             else {
                 response.sendRedirect("index.jsp?mensagem=erroaotentarcadastrarpaciente");
             }
+        } else {
+            response.sendRedirect("index.jsp?mensagem=erroaotentarcadastrarpaciente");
         }
+    }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("index.jsp?mensagem=acessonegado");
     }
 }

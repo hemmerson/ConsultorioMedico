@@ -41,6 +41,13 @@ public class EditarPorPaciente extends HttpServlet {
             } else {
                 response.sendRedirect("index.jsp?mensagem=erroaotentareditarpaciente");
             }
+        } else {
+            response.sendRedirect("index.jsp?mensagem=erroaotentareditarpaciente");
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("index.jsp?mensagem=acessonegado");
     }
 }

@@ -40,11 +40,16 @@ public class CadastrarMedico extends HttpServlet {
                 } catch (ErroDAO e) {
                     response.sendRedirect("index.jsp?mensagem=erroaotentarcadastrarmedico");
                 }
-            }
-            else {
+            } else {
                 response.sendRedirect("index.jsp?mensagem=erroaotentarcadastrarmedico");
             }
+        } else {
+            response.sendRedirect("index.jsp?mensagem=erroaotentarcadastrarmedico");
         }
+    }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("index.jsp?mensagem=acessonegado");
     }
 }

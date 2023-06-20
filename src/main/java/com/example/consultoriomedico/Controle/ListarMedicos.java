@@ -26,19 +26,23 @@ public class ListarMedicos extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
-        Medico medicoSessao = (Medico) request.getSession().getAttribute("usuario");
-        if (medicoSessao != null && medicoSessao.isIs_medico()) {
-            try {
+
+        try {
+            Medico medicoSessao = (Medico) request.getSession().getAttribute("usuario");
+            if (medicoSessao != null && medicoSessao.isIs_medico()) {
                 MedicoDaoInterface dao = new MedicoDaoClasse();
                 List<Medico> medicos = dao.buscar();
                 request.setAttribute("medicos", medicos);
                 dao.sair();
                 request.getRequestDispatcher("WEB-INF/listaMedicos.jsp").forward(request, response);
-            } catch (ErroDAO e) {
-                request.getRequestDispatcher("WEB-INF/listaMedicos.jsp?mensagem=erroaomostrar").forward(request, response);
+            } else {
+                response.sendRedirect("index.jsp?mensagem=acessonegado");
             }
-        } else {
+        } catch (ErroDAO e) {
+            request.getRequestDispatcher("WEB-INF/listaMedicos.jsp?mensagem=erroaomostrar").forward(request, response);
+        } catch (Exception e) {
             response.sendRedirect("index.jsp?mensagem=acessonegado");
         }
+
     }
 }

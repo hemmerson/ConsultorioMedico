@@ -37,6 +37,8 @@ public class ListarPacientes extends HttpServlet {
                 }
             } catch (ErroDAO e) {
                 request.getRequestDispatcher("WEB-INF/listaPacientes.jsp?mensagem=erroaomostrar").forward(request, response);
+            } catch (Exception e){
+                response.sendRedirect("index.jsp?mensagem=acessonegado");
             }
 
     }

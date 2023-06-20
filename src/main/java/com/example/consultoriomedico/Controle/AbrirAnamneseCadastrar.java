@@ -25,24 +25,26 @@ public class AbrirAnamneseCadastrar extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
 
-        int codigoPaciente = Integer.parseInt(request.getParameter("codigoPaciente"));
-
-        Medico medicoSessao = (Medico) request.getSession().getAttribute("usuario");
-        if (medicoSessao != null && medicoSessao.isIs_medico()) {
             try {
-                PacienteDaoInterface daoPaciente = new PacienteDaoClasse();
-                Paciente p = daoPaciente.buscar(codigoPaciente);
-                LocalDateTime dataHoraConsulta = LocalDateTime.now();
-                request.setAttribute("paciente",p);
-                request.setAttribute("medico",medicoSessao);
-                request.setAttribute("dataConsulta", dataHoraConsulta);
-                request.getRequestDispatcher("WEB-INF/anamnese.jsp").forward(request, response);
+                int codigoPaciente = Integer.parseInt(request.getParameter("codigoPaciente"));
+                Medico medicoSessao = (Medico) request.getSession().getAttribute("usuario");
+                if (medicoSessao != null && medicoSessao.isIs_medico()) {
+                    PacienteDaoInterface daoPaciente = new PacienteDaoClasse();
+                    Paciente p = daoPaciente.buscar(codigoPaciente);
+                    LocalDateTime dataHoraConsulta = LocalDateTime.now();
+                    request.setAttribute("paciente", p);
+                    request.setAttribute("medico", medicoSessao);
+                    request.setAttribute("dataConsulta", dataHoraConsulta);
+                    request.getRequestDispatcher("WEB-INF/anamnese.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("index.jsp?mensagem=acessonegado");
+                }
             } catch (ErroDAO e) {
                 request.getRequestDispatcher("WEB-INF/anamnese.jsp?mensagem=erroaoabriranamnese").forward(request, response);
+            } catch (Exception ex){
+                response.sendRedirect("index.jsp?mensagem=acessonegado");
             }
-        } else {
-            response.sendRedirect("prontuario.jsp?mensagem=acessonegado");
-        }
+
 
     }
 }

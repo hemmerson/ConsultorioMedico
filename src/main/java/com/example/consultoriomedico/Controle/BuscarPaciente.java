@@ -22,22 +22,30 @@ import java.util.List;
 public class BuscarPaciente extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html");
-        String cpf = request.getParameter("cpf");
-        Medico medicoSessao = (Medico) request.getSession().getAttribute("usuario");
-        if (medicoSessao != null && medicoSessao.isIs_medico()) {
-            try {
+
+        try {
+            request.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html");
+            String cpf = request.getParameter("cpf");
+            Medico medicoSessao = (Medico) request.getSession().getAttribute("usuario");
+            if (medicoSessao != null && medicoSessao.isIs_medico()) {
                 PacienteDaoInterface dao = new PacienteDaoClasse();
                 List<Paciente> pacientes = dao.buscar(cpf);
                 request.setAttribute("pacientes", pacientes);
                 dao.sair();
                 request.getRequestDispatcher("WEB-INF/listaPacientes.jsp").forward(request, response);
-            } catch (ErroDAO e) {
-                request.getRequestDispatcher("WEB-INF/listaPacientes.jsp?mensagem=erroaomostrar").forward(request, response);
+            } else {
+                response.sendRedirect("index.jsp?mensagem=acessonegado");
             }
-        }else{
+        } catch (ErroDAO e) {
+            request.getRequestDispatcher("WEB-INF/listaPacientes.jsp?mensagem=erroaomostrar").forward(request, response);
+        } catch (Exception e) {
             response.sendRedirect("index.jsp?mensagem=acessonegado");
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("index.jsp?mensagem=acessonegado");
     }
 }
