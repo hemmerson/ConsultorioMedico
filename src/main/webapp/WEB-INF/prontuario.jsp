@@ -113,8 +113,8 @@
                             </tr>
                             <meu:anamneses anamneses="${requestScope.anamneses}"/>
                         </table>
+                        <hr>
                     </div>
-                    <hr>
                 </div>
             </div>
         </div>
